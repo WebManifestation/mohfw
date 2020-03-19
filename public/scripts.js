@@ -9,12 +9,12 @@ async function init() {
     const stateName = prop;
     const confirmedIndian = data[prop]['Total Confirmed cases (Indian National)'];
     const confirmedForeign = data[prop]['Total Confirmed cases ( Foreign National )'];
-    const cured = data[prop]['Cured/Discharged'];
+    const cured = data[prop]['Cured/Discharged/Migrated'];
     const deaths = data[prop]['Death'];
     // console.log(`State = ${stateName}`);
     // console.log(`Total Confirmed cases (Indian National) = ${confirmedIndian}`);
     // console.log(`Total Confirmed cases ( Foreign National ) = ${confirmedForeign}`);
-    // console.log(`Cured/Discharged = ${cured}`);
+    // console.log(`Cured/Discharged/Migrated = ${cured}`);
     // console.log(`_________________________`);
 
     const titleElm = document.createElement("H2");
@@ -24,7 +24,7 @@ async function init() {
     const confirmedForeignElm = document.createElement("div");
     confirmedForeignElm.appendChild(document.createTextNode(`Total Confirmed cases ( Foreign National ): ${confirmedForeign}`));
     const curedElm = document.createElement("div");
-    curedElm.appendChild(document.createTextNode(`Cured/Discharged: ${cured}`));
+    curedElm.appendChild(document.createTextNode(`Cured/Discharged/Migrated: ${cured}`));
     const deathsElm = document.createElement("div");
     deathsElm.appendChild(document.createTextNode(`Death: ${deaths}`));
 

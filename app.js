@@ -2,7 +2,6 @@
 const cluster = require('cluster');
 const fs = require('fs');
 const util = require('util');
-const cron = require('node-cron');
 const readFile = util.promisify(fs.readFile);
 const updateTable = require('./update-table');
 
@@ -27,9 +26,6 @@ if (cluster.isMaster) {
   });
 
   updateTable();
-  cron.schedule('0 0 */3 * * *', () => {
-    updateTable();
-  });
 
   // Code to run if we're in a worker process
 } else {
@@ -42,6 +38,11 @@ if (cluster.isMaster) {
   app.get('/get-data', async (req, res) => {
     let loadData = await (await readFile('data.json')).toString();
     res.json(JSON.parse(loadData));
+  });
+
+  app.get('/update-data', async (req, res) => {
+    updateTable();
+    res.send('Update function triggered');
   });
 
   app.get('*', (req, res) => {

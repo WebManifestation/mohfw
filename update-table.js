@@ -33,7 +33,7 @@ function cleanupTable(rawData) {
       "S. No.": rawData[0][i]['S. No.'],
       "Total Confirmed cases (Indian National)": rawData[0][i]['Total Confirmed cases (Indian National)'],
       "Total Confirmed cases ( Foreign National )": rawData[0][i]['Total Confirmed cases ( Foreign National )'],
-      "Cured/Discharged": rawData[0][i]['Cured/Discharged'],
+      "Cured/Discharged/Migrated": rawData[0][i]['Cured/Discharged/Migrated'],
       "Death": rawData[0][i]['Death']
     }
   }

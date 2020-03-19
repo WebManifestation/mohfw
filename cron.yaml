@@ -1,0 +1,5 @@
+version: 1
+cron: 
+  - name: "update-data"
+    url: "/update-data"
+    schedule: "0 */3 * * *"
