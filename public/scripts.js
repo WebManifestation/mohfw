@@ -35,4 +35,85 @@ async function init() {
     mainElem.appendChild(curedElm);
     mainElem.appendChild(deathsElm);
   }
+
+  const stateList = {
+    'Andhra Pradesh': 'AP',
+    'Chhattisgarh': 'CT',
+    'Delhi': 'DL',
+    'Gujarat': 'GJ',
+    'Haryana': 'HR',
+    'Himachal Pradesh': 'HP',
+    'Karnataka': 'KA',
+    'Kerala': 'KL',
+    'Madhya Pradesh': 'MP',
+    'Maharashtra': 'MH',
+    'Odisha': 'OR',
+    'Puducherry': 'PY',
+    'Punjab': 'PB',
+    'Rajasthan': 'RJ',
+    'Tamil Nadu': 'TN',
+    'Telengana': 'TL',
+    'Chandigarh': 'CH',
+    'Jammu and Kashmir': 'JK',
+    'Uttar Pradesh': 'UP',
+    'West Bengal': 'WB'
+  }
+
+  const theMap = zingchart.loadModules('maps, maps-ind', function(e) {
+    zingchart.render ({
+      id: 'myChart',
+      data: {
+        shapes: [
+          {
+            type: 'zingchart.maps',
+            options: {
+              name: 'ind',
+       
+              zooming: false,
+              panning: true,
+              scrolling: false,
+              
+              style: {
+                controls: {
+                  visible: true
+                },
+                label: {
+                  // visible: false,
+                },
+                fillType: 'radial',
+                cursor: 'pointer',
+                hoverState: {
+                  alpha: 0.3,
+                  backgroundColor: 'white',
+                },
+                items: {
+                  MP: {
+                    backgroundColor: 'red',
+                    label: {
+                      visible: true,
+                      // text: 'asdfads'
+                    }
+                  }
+                },
+                tooltip: {
+                  alpha: 0.8,
+                  backgroundColor: 'white',
+                  borderColor: 'white',
+                  borderRadius: 3,
+                  fontColor: 'black',
+                  // fontFamily: 'Georgia',
+                  fontSize: 22,
+                  textAlpha: 1
+                }
+              }
+            }
+          }
+        ]
+      },
+      height: 600,
+      width: '100%'
+    });
+  });
+
+  console.log(theMap);
 };
