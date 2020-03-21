@@ -2,11 +2,16 @@
 const cluster = require('cluster');
 const fs = require('fs');
 const util = require('util');
+const cron = require('node-cron');
 const readFile = util.promisify(fs.readFile);
 const updateTable = require('./update-table');
 
 // Code to run if we're in the master process
 if (cluster.isMaster) {
+
+  cron.schedule('0 0 */1 * * *', () => {
+    updateTable();
+  });
 
   // Count the machine's CPUs
   const cpuCount = require('os').cpus().length;
