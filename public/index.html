@@ -14,14 +14,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>COVID-19 India's statewise status</title>
+  <title>COVID-19 in India</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="normalize.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <h1>COVID-19 India's statewise status*</h1>
+  <h1>COVID-19 in India</h1>
+  <div id="total-count">
+    <h2>Total numbers</h2>
+    <div class="total-item">
+      <div class="total-number" id="total-confirmed-indian" style="background-color: hsl(30, 90%, 60%);">0</div>
+      <div>Total Confirmed cases (Indian National)</div>
+    </div>
+    <div class="total-item">
+      <div class="total-number" id="total-confirmed-foreign" style="background-color: hsl(200, 70%, 40%);">0</div>
+      <div>Total Confirmed cases (Foreign National)</div>
+    </div>
+    <div class="total-item">
+      <div class="total-number" id="total-cured" style="background-color: hsl(120, 60%, 60%);">0</div>
+      <div>Cured/Discharged/Migrated</div>
+    </div>
+    <div class="total-item">
+      <div class="total-number" id="total-deaths" style="background-color: hsla(0, 90%, 60%);">0</div>
+      <div>Deaths</div>
+    </div>
+  </div>
+
+  <h2 style="padding: 0 32px;">Statewise numbers</h2>
   <div id="wrapper">
     <canvas id="myChart"></canvas>
   </div>

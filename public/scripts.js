@@ -6,6 +6,10 @@ async function init() {
   const confirmedForeignLegend = document.getElementById('confirmed-Foreign');
   const curedLegend = document.getElementById('cured');
   const deathsLegend = document.getElementById('deaths');
+  const totalConfirmedIndianElem = document.getElementById('total-confirmed-indian');
+  const totalConfirmedForeignElem = document.getElementById('total-confirmed-foreign');
+  const totalCuredElem = document.getElementById('total-cured');
+  const totalDeathsElem = document.getElementById('total-deaths');
   const mohfwLink = document.getElementById('mohfw-link');
   const loadData = await fetch('/get-data');
   const data = await loadData.json();
@@ -27,6 +31,16 @@ async function init() {
     curedArr.push(cured);
     deathsArr.push(deaths);
   }
+
+  const totalConfirmedIndian = confirmedIndianArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+  const totalConfirmedForeign = confirmedForeignArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+  const totalCured = curedArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+  const totalDeaths = deathsArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+
+  totalConfirmedIndianElem.innerHTML = totalConfirmedIndian;
+  totalConfirmedForeignElem.innerHTML = totalConfirmedForeign;
+  totalCuredElem.innerHTML = totalCured;
+  totalDeathsElem.innerHTML = totalDeaths;
 
   wrapperElem.style.height = stateNameArr.length * 175 + 'px';
 
