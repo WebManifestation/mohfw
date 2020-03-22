@@ -1,21 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50831887-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-50831887-2');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MOHFW</title>
+  <title>COVID-19 India's statewise status</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="normalize.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <h1>MOHFW</h1>
+  <h1>COVID-19 India's statewise status*</h1>
   <div id="wrapper">
     <canvas id="myChart"></canvas>
   </div>
-  <div id="main"></div>
+  <div id="filter">
+    <img alt="filters" src="filter.png" id="filter-img" />
+    <div class="legend" id="confirmed-indian">
+      <div style="background-color: hsl(30, 90%, 60%);" class="legend-color"></div>
+      <div>Total Confirmed cases (Indian National)</div>
+    </div>
+    <div class="legend" id="confirmed-Foreign">
+      <div style="background-color: hsl(200, 70%, 40%);" class="legend-color"></div>
+      <div>Total Confirmed cases (Foreign National)</div>
+    </div>
+    <div class="legend" id="cured">
+      <div style="background-color: hsl(120, 60%, 60%);" class="legend-color"></div>
+      <div>Cured/Discharged/Migrated</div>
+    </div>
+    <div class="legend" id="deaths">
+      <div style="background-color: hsla(0, 90%, 60%);" class="legend-color"></div>
+      <div>Deaths</div>
+    </div>
+  </div>
+  <p id="footnote">*All data is updated from the officeal <a id="mohfw-link" href="https://www.mohfw.gov.in/" target="_blank"
+      rel="nofollow">Ministry of Health and Family Welfare</a> site every hour.</p>
   <script src="Chart.bundle.js"></script>
   <script src="chartjs-plugin-datalabels.js"></script>
   <script src="scripts.js"></script>
 </body>
+
 </html>

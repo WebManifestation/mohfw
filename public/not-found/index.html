@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50831887-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-50831887-2');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Page not found</title>
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../normalize.css">
+  <link rel="stylesheet" href="../styles.css">
 </head>
+
 <body>
   <h1>Page not found</h1>
+  <div style="text-align: center; margin-top: 16px;"><a id="back-link" href="/">Go back</a></div>
+  <script>
+    document.getElementById('back-link').addEventListener('click', () => {
+      gtag('event', 'click', {
+        'event_category': 'Back link',
+        'event_label': 'Home',
+      });
+    })
+  </script>
 </body>
+
 </html>
