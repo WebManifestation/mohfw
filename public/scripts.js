@@ -42,7 +42,7 @@ async function init() {
   totalCuredElem.innerHTML = totalCured;
   totalDeathsElem.innerHTML = totalDeaths;
 
-  wrapperElem.style.height = stateNameArr.length * 175 + 'px';
+  wrapperElem.style.height = stateNameArr.length * 140 + 'px';
 
   const ctx = document.getElementById('myChart').getContext('2d');
   Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif";
@@ -55,21 +55,25 @@ async function init() {
       datasets: [
         {
           label: 'Total Confirmed cases (Indian National)',
+          categoryPercentage: 0.9,
           backgroundColor: 'hsl(30, 90%, 60%)',
           data: confirmedIndianArr
         },
         {
           label: 'Total Confirmed cases (Foreign National)',
+          categoryPercentage: 0.9,
           backgroundColor: 'hsl(200, 70%, 40%)',
           data: confirmedForeignArr
         },
         {
           label: 'Cured/Discharged/Migrated',
+          categoryPercentage: 0.9,
           backgroundColor: 'hsl(120, 60%, 60%)',
           data: curedArr
         },
         {
           label: 'Deaths',
+          categoryPercentage: 0.9,
           backgroundColor: 'hsla(0, 90%, 60%)',
           data: deathsArr
         }
