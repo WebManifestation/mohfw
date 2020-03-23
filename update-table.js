@@ -13,8 +13,10 @@ async function updateTable() {
   const loadUsedTable = await (await readFile('data.json')).toString();
   const usedTable = JSON.parse(loadUsedTable);
 
+  delete usedTable.timestamp;
+  
   const check = diff(usedTable, onlineTable);
-
+  
   const indiaTime = new Date().toLocaleString('en-US', {
     timeZone: 'Asia/Calcutta'
   });
@@ -24,6 +26,7 @@ async function updateTable() {
     const newFileName = path.join('./', 'backups/', `data-backup-${Date.now()}.json`);
     await renameFile('data.json', newFileName);
     
+    onlineTable.timestamp = Date.now();
     await writeFile(`data.json`, JSON.stringify(onlineTable));
     console.log(indiaTime + ': New data has been saved.');
     console.log(check);

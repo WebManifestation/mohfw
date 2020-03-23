@@ -5,6 +5,7 @@ const util = require('util');
 const cron = require('node-cron');
 const readFile = util.promisify(fs.readFile);
 const updateTable = require('./update-table');
+const readPastData = require('./read-past-data');
 
 // Code to run if we're in the master process
 if (cluster.isMaster) {
@@ -43,6 +44,11 @@ if (cluster.isMaster) {
   app.get('/get-data', async (req, res) => {
     let loadData = await (await readFile('data.json')).toString();
     res.json(JSON.parse(loadData));
+  });
+
+  app.get('/get-past-data', async (req, res) => {
+    const pastData = await readPastData();
+    res.json(pastData);
   });
 
   app.get('/update-data', async (req, res) => {

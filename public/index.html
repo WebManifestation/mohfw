@@ -24,6 +24,11 @@
   <h1>COVID-19 in India</h1>
   <div id="total-count">
     <h2>Total numbers</h2>
+
+    <div id="wrapper-total">
+      <canvas id="totalChart"></canvas>
+    </div>
+    
     <div class="total-item">
       <div class="total-number" id="total-confirmed-indian" style="background-color: hsl(30, 90%, 60%);">0</div>
       <div>Total Confirmed cases (Indian National)</div>
@@ -65,9 +70,10 @@
       <div>Deaths</div>
     </div>
   </div>
-  <p id="footnote">*All data is updated from the official <a id="mohfw-link" href="https://www.mohfw.gov.in/" target="_blank"
-      rel="nofollow">Ministry of Health and Family Welfare</a> site every hour.</p>
-  <script src="Chart.bundle.js"></script>
+  <p id="footnote">*All data is updated from the official <a id="mohfw-link" href="https://www.mohfw.gov.in/"
+      target="_blank" rel="nofollow">Ministry of Health and Family Welfare</a> site every hour.</p>
+  <div id="timestamp">Last updated:<br /><span id="last-updated"></span></div>
+  <script src="Chart.min.js"></script>
   <script src="chartjs-plugin-datalabels.js"></script>
   <script src="scripts.js"></script>
 </body>
