@@ -16,6 +16,7 @@ async function updateTable() {
   delete usedTable.timestamp;
   
   const check = diff(usedTable, onlineTable);
+
   
   const indiaTime = new Date().toLocaleString('en-US', {
     timeZone: 'Asia/Calcutta'
@@ -34,8 +35,16 @@ async function updateTable() {
 }
 
 function cleanupTable(rawData) {
+  // Find right table
+  let tableIndex = 0;
+  for (let i = 0; i < rawData.length; i++) {
+    const table = rawData[i];
+    if (table[0]['Name of State / UT']) {
+      tableIndex = i;
+      break;
+    }
+  }
   const cleanObj = {};
-  const tableIndex = 1;
   for (let i = 0; i < rawData[tableIndex].length - 1; i++) {
     cleanObj[rawData[tableIndex][i]['Name of State / UT']] = {
       "S. No.": rawData[tableIndex][i]['S. No.'],
