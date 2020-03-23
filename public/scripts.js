@@ -11,7 +11,6 @@ async function init() {
   const totalCuredElem = document.getElementById('total-cured');
   const totalDeathsElem = document.getElementById('total-deaths');
   const mohfwLink = document.getElementById('mohfw-link');
-  const lastUpdated = document.getElementById('last-updated');
   const loadData = await fetch('/get-data');
   const loadPastData = await fetch('/get-past-data');
   const pastData = await loadPastData.json();
@@ -36,7 +35,6 @@ async function init() {
       deathsArr.push(deaths);
     }
   }
-  lastUpdated.innerHTML = new Date(data.timestamp);
 
   const totalConfirmedIndian = confirmedIndianArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
   const totalConfirmedForeign = confirmedForeignArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
