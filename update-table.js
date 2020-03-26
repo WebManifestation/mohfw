@@ -45,13 +45,15 @@ function cleanupTable(rawData) {
     }
   }
   const cleanObj = {};
-  for (let i = 0; i < rawData[tableIndex].length - 1; i++) {
-    cleanObj[rawData[tableIndex][i]['Name of State / UT']] = {
-      "S. No.": rawData[tableIndex][i]['S. No.'],
-      "Total Confirmed cases (Indian National)": rawData[tableIndex][i]['Total Confirmed cases (Indian National)'],
-      "Total Confirmed cases ( Foreign National )": rawData[tableIndex][i]['Total Confirmed cases ( Foreign National )'],
-      "Cured/Discharged/Migrated": rawData[tableIndex][i]['Cured/Discharged/Migrated'],
-      "Death": rawData[tableIndex][i]['Death']
+  for (let i = 0; i < rawData[tableIndex].length; i++) {
+    if (parseInt(rawData[tableIndex][i]['S. No.'])) {
+      cleanObj[rawData[tableIndex][i]['Name of State / UT']] = {
+        "S. No.": rawData[tableIndex][i]['S. No.'],
+        "Total Confirmed cases (Indian National)": rawData[tableIndex][i]['Total Confirmed cases (Indian National)'],
+        "Total Confirmed cases ( Foreign National )": rawData[tableIndex][i]['Total Confirmed cases ( Foreign National )'],
+        "Cured/Discharged/Migrated": rawData[tableIndex][i]['Cured/Discharged/Migrated'],
+        "Death": rawData[tableIndex][i]['Death']
+      }
     }
   }
   return cleanObj;

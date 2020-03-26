@@ -46,7 +46,7 @@ async function init() {
   totalCuredElem.innerHTML = totalCured;
   totalDeathsElem.innerHTML = totalDeaths;
 
-  wrapperElem.style.height = stateNameArr.length * 140 + 'px';
+  wrapperElem.style.height = stateNameArr.length * 180 + 'px';
   Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif";
 
   const ctxTotal = document.getElementById('totalChart').getContext('2d');
@@ -58,7 +58,8 @@ async function init() {
         const d = new Date(arr.timestamp)
         const dtf = new Intl.DateTimeFormat('en', { month: 'numeric', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false })
         const timeFormat = dtf.formatToParts(d);
-        return timeFormat.reduce((a, b) => a + b.value, '');
+        const fullText = timeFormat.reduce((a, b) => a + b.value, '');
+        return fullText.split(', ');
       }),
       datasets: [
         {
