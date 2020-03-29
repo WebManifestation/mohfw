@@ -14,10 +14,9 @@ async function updateTable() {
   const usedTable = JSON.parse(loadUsedTable);
 
   delete usedTable.timestamp;
-  
+
   const check = diff(usedTable, onlineTable);
 
-  
   const indiaTime = new Date().toLocaleString('en-US', {
     timeZone: 'Asia/Calcutta'
   });
@@ -26,7 +25,7 @@ async function updateTable() {
   } else {
     const newFileName = path.join('./', 'backups/', `data-backup-${Date.now()}.json`);
     await renameFile('data.json', newFileName);
-    
+
     onlineTable.timestamp = Date.now();
     await writeFile(`data.json`, JSON.stringify(onlineTable));
     console.log(indiaTime + ': New data has been saved.');
@@ -49,10 +48,10 @@ function cleanupTable(rawData) {
     if (parseInt(rawData[tableIndex][i]['S. No.'])) {
       cleanObj[rawData[tableIndex][i]['Name of State / UT']] = {
         "S. No.": rawData[tableIndex][i]['S. No.'],
-        "Total Confirmed cases (Indian National)": rawData[tableIndex][i]['Total Confirmed cases (Indian National)'],
-        "Total Confirmed cases ( Foreign National )": rawData[tableIndex][i]['Total Confirmed cases ( Foreign National )'],
-        "Cured/Discharged/Migrated": rawData[tableIndex][i]['Cured/Discharged/Migrated'],
-        "Death": rawData[tableIndex][i]['Death']
+        "Total Confirmed cases (Indian National)": parseInt(rawData[tableIndex][i]['Total Confirmed cases *']),
+        "Total Confirmed cases ( Foreign National )": 0,
+        "Cured/Discharged/Migrated": parseInt(rawData[tableIndex][i]['Cured/Discharged/Migrated']),
+        "Death": parseInt(rawData[tableIndex][i]['Death'])
       }
     }
   }
