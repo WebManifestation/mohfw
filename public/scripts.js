@@ -3,11 +3,9 @@ init();
 async function init() {
   const wrapperElem = document.getElementById('wrapper');
   const confirmedIndianLegend = document.getElementById('confirmed-indian');
-  const confirmedForeignLegend = document.getElementById('confirmed-Foreign');
   const curedLegend = document.getElementById('cured');
   const deathsLegend = document.getElementById('deaths');
-  const totalConfirmedIndianElem = document.getElementById('total-confirmed-indian');
-  const totalConfirmedForeignElem = document.getElementById('total-confirmed-foreign');
+  const totalConfirmedElem = document.getElementById('total-confirmed');
   const totalCuredElem = document.getElementById('total-cured');
   const totalDeathsElem = document.getElementById('total-deaths');
   const mohfwLink = document.getElementById('mohfw-link');
@@ -18,6 +16,7 @@ async function init() {
   const stateNameArr = [];
   const confirmedIndianArr = [];
   const confirmedForeignArr = [];
+  const confirmedArr = [];
   const curedArr = [];
   const deathsArr = [];
   for (const prop in data) {
@@ -31,22 +30,33 @@ async function init() {
       stateNameArr.push(stateName);
       confirmedIndianArr.push(confirmedIndian);
       confirmedForeignArr.push(confirmedForeign);
+      confirmedArr.push(parseInt(confirmedIndian) + parseInt(confirmedForeign));
       curedArr.push(cured);
       deathsArr.push(deaths);
     }
   }
 
+  //if mobile
+  const width = (window.innerWidth >= 480) ? 480 : window.innerWidth; 
+  if(width=== 480) {
+    document.getElementById('main').style.boxShadow = '4px 4px 20px 0px rgba(0,0,0,0.48)';
+    document.body.style.backgroundColor = 'lightsteelblue';
+  }
+
   const totalConfirmedIndian = confirmedIndianArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
   const totalConfirmedForeign = confirmedForeignArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+  const totalConfirmed = totalConfirmedIndian + totalConfirmedForeign;
   const totalCured = curedArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
   const totalDeaths = deathsArr.reduce((a, b) => parseInt(a) + parseInt(b), 0);
 
-  totalConfirmedIndianElem.innerHTML = totalConfirmedIndian;
-  totalConfirmedForeignElem.innerHTML = totalConfirmedForeign;
+  totalConfirmedElem.innerHTML = totalConfirmed;
+  // totalConfirmedForeignElem.innerHTML = totalConfirmedForeign;
   totalCuredElem.innerHTML = totalCured;
   totalDeathsElem.innerHTML = totalDeaths;
 
-  wrapperElem.style.height = stateNameArr.length * 180 + 'px';
+  wrapperElem.style.height = stateNameArr.length * 150 + 'px';
+  document.getElementById('wrapper-total').style.height = width * 0.6 + 'px';
+  document.getElementById('wrapper-total-cd').style.height = width * 0.6 + 'px';
   Chart.defaults.global.defaultFontFamily = "'Montserrat', sans-serif";
 
   const ctxTotal = document.getElementById('totalChart').getContext('2d');
@@ -54,39 +64,78 @@ async function init() {
   const totalChart = new Chart(ctxTotal, {
     type: 'line',
     data: {
-      labels: pastData.map(arr => {
+      labels: pastData.map((arr, i) => {
         const d = new Date(arr.timestamp)
-        const dtf = new Intl.DateTimeFormat('en', { month: 'numeric', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false })
+        const dtf = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit'})
         const timeFormat = dtf.formatToParts(d);
         const fullText = timeFormat.reduce((a, b) => a + b.value, '');
-        return fullText.split(', ');
+        if (i === 0) {
+          return fullText.split(', ');
+        } else if (i === Math.ceil(pastData.length / 2) - 1) {
+          return fullText.split(', ');
+        } else if (i === pastData.length - 1) {
+          return fullText.split(', ');
+        }
+        return '';
       }),
       datasets: [
         {
-          label: 'Total Confirmed cases (Indian National)',
-          // categoryPercentage: 0.9,
+          label: 'Confirmed cases',
           fill: false,
           borderColor: 'hsl(30, 90%, 60%)',
-          data: pastData.map(arr => arr.confirmedIndian)
+          data: pastData.map(arr => parseInt(arr.confirmedIndian) + parseInt(arr.confirmedForeign))
         },
-        {
-          label: 'Total Confirmed cases (Foreign National)',
-          fill: false,
-          // categoryPercentage: 0.9,
-          borderColor: 'hsl(200, 70%, 40%)',
-          data: pastData.map(arr => arr.confirmedForeign)
-        },
+      ]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      responsive: true,
+      scales: {
+        xAxes: [{
+          display: true,
+        }],
+      },
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+        datalabels: {
+          display: false
+        }
+      }
+    }
+  });
+
+  const ctxTotalCd = document.getElementById('totalChart-cd').getContext('2d');
+
+  const totalChartCd = new Chart(ctxTotalCd, {
+    type: 'line',
+    data: {
+      labels: pastData.map((arr, i) => {
+        const d = new Date(arr.timestamp)
+        const dtf = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit'})
+        const timeFormat = dtf.formatToParts(d);
+        const fullText = timeFormat.reduce((a, b) => a + b.value, '');
+        if (i === 0) {
+          return fullText.split(', ');
+        } else if (i === Math.ceil(pastData.length / 2) - 1) {
+          return fullText.split(', ');
+        } else if (i === pastData.length - 1) {
+          return fullText.split(', ');
+        }
+        return '';
+      }),
+      datasets: [
         {
           label: 'Cured/Discharged/Migrated',
           fill: false,
-          // categoryPercentage: 0.9,
           borderColor: 'hsl(120, 60%, 60%)',
           data: pastData.map(arr => arr.cured)
         },
         {
           label: 'Deaths',
           fill: false,
-          // categoryPercentage: 0.9,
           borderColor: 'hsla(0, 90%, 60%)',
           data: pastData.map(arr => arr.deaths)
         }
@@ -102,6 +151,8 @@ async function init() {
           display: true,
         }],
       },
+      maintainAspectRatio: false,
+      responsive: true,
       plugins: {
         datalabels: {
           display: false
@@ -120,16 +171,10 @@ async function init() {
       labels: stateNameArr,
       datasets: [
         {
-          label: 'Total Confirmed cases (Indian National)',
+          label: 'Confirmed cases',
           categoryPercentage: 0.9,
           backgroundColor: 'hsl(30, 90%, 60%)',
-          data: confirmedIndianArr
-        },
-        {
-          label: 'Total Confirmed cases (Foreign National)',
-          categoryPercentage: 0.9,
-          backgroundColor: 'hsl(200, 70%, 40%)',
-          data: confirmedForeignArr
+          data: confirmedArr
         },
         {
           label: 'Cured/Discharged/Migrated',
@@ -195,79 +240,49 @@ async function init() {
     let value = 0;
     if (chart.getDatasetMeta(0).hidden) {
       chart.getDatasetMeta(0).hidden = null;
-      totalChart.getDatasetMeta(0).hidden = null;
       confirmedIndianLegend.style.opacity = 1;
       confirmedIndianLegend.style.textDecoration = 'none';
       value = 1;
     } else {
       chart.getDatasetMeta(0).hidden = true;
-      totalChart.getDatasetMeta(0).hidden = true;
       confirmedIndianLegend.style.opacity = 0.5;
       confirmedIndianLegend.style.textDecoration = 'line-through';
     }
     gtag('event', 'click', {
-      'event_category': 'filter',
-      'event_label': 'Total Confirmed cases (Indian National)',
+      'event_category': 'Filter',
+      'event_label': 'Confirmed cases',
       'value': value
     });
-    chart.update();
-    totalChart.update();
-  });
-  confirmedForeignLegend.addEventListener('click', () => {
-    let value = 0;
-    if (chart.getDatasetMeta(1).hidden) {
-      chart.getDatasetMeta(1).hidden = null;
-      totalChart.getDatasetMeta(1).hidden = null;
-      confirmedForeignLegend.style.opacity = 1;
-      confirmedForeignLegend.style.textDecoration = 'none';
-      value = 1;
-    } else {
-      chart.getDatasetMeta(1).hidden = true;
-      totalChart.getDatasetMeta(1).hidden = true;
-      confirmedForeignLegend.style.opacity = 0.5;
-      confirmedForeignLegend.style.textDecoration = 'line-through';
-    }
-    gtag('event', 'click', {
-      'event_category': 'filter',
-      'event_label': 'Total Confirmed cases (Foreign National)',
-      'value': value
-    });
-    totalChart.update();
     chart.update();
   });
   curedLegend.addEventListener('click', () => {
     let value = 0;
-    if (chart.getDatasetMeta(2).hidden) {
-      chart.getDatasetMeta(2).hidden = null;
-      totalChart.getDatasetMeta(2).hidden = null;
+    if (chart.getDatasetMeta(1).hidden) {
+      chart.getDatasetMeta(1).hidden = null;
       curedLegend.style.opacity = 1;
       curedLegend.style.textDecoration = 'none';
       value = 1;
     } else {
-      chart.getDatasetMeta(2).hidden = true;
-      totalChart.getDatasetMeta(2).hidden = true;
+      chart.getDatasetMeta(1).hidden = true;
       curedLegend.style.opacity = 0.5;
       curedLegend.style.textDecoration = 'line-through';
     }
     gtag('event', 'click', {
       'event_category': 'Filter',
-      'event_label': 'Cured/Discharged/Migrated',
+      'event_label': 'Cured',
       'value': value
     });
-    totalChart.update();
     chart.update();
   });
   deathsLegend.addEventListener('click', () => {
     let value = 0;
-    if (chart.getDatasetMeta(3).hidden) {
-      chart.getDatasetMeta(3).hidden = null;
-      totalChart.getDatasetMeta(3).hidden = null;
+    if (chart.getDatasetMeta(2).hidden) {
+      chart.getDatasetMeta(2).hidden = null;
       deathsLegend.style.opacity = 1;
       deathsLegend.style.textDecoration = 'none';
       value = 1;
     } else {
-      chart.getDatasetMeta(3).hidden = true;
-      totalChart.getDatasetMeta(3).hidden = true;
+      chart.getDatasetMeta(2).hidden = true;
       deathsLegend.style.opacity = 0.5;
       deathsLegend.style.textDecoration = 'line-through';
     }
@@ -276,7 +291,6 @@ async function init() {
       'event_label': 'Deaths',
       'value': value
     });
-    totalChart.update();
     chart.update();
   });
 

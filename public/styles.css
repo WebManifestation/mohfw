@@ -2,6 +2,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   max-width: 480px;
   margin: 0 auto;
+  background-color: white;
 }
 
 canvas {
@@ -10,11 +11,16 @@ canvas {
 
 h1 {
   text-align: center;
-  padding: 0 32px;
+  padding: 32px 32px 0;
   line-height: 1.5;
   text-transform: uppercase;
   margin-bottom: 0;
-  font-size: 28px;
+  font-size: 32px;
+}
+
+#main {
+  background-color: white;
+  box-shadow: none;
 }
 
 #wrapper-total {
@@ -26,19 +32,25 @@ h1 {
   font-size: 14px;
 }
 
+#total-numbers {
+  margin: 32px 0 64px;
+}
+
 .total-item {
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   align-items: center;
   justify-content: left;
+  font-size: 16px;
 }
 
 .total-number {
   font-size: 35px;
-  margin-right: 8px;
+  margin-right: 16px;
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
+  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.25);
 }
 
 #wrapper {
@@ -46,8 +58,10 @@ h1 {
 }
 
 #footnote {
-  padding: 16px 32px;
+  padding: 16px 32px 32px;
   font-style: italic;
+  margin-bottom: 32px;
+  line-height: 1.5;
 }
 
 #filter {
@@ -62,12 +76,18 @@ h1 {
   padding-bottom: 1px;
   margin-top: 32px;
   user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#confirmed-indian {
+  width: 100%;
 }
 
 #filter-img {
   position: absolute;
-  bottom: 7px;
-  right: 8px;
+  top: 16px;
+  right: 16px;
   width: 32px;
   height: auto;
   opacity: 0.3;
@@ -78,8 +98,9 @@ h1 {
   display: flex;
   justify-content: left;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   margin-left: 32px;
+  padding-right: 64px;
 }
 
 .legend-color {

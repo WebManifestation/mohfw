@@ -21,57 +21,62 @@
 </head>
 
 <body>
-  <h1>COVID-19 in India</h1>
-  <div id="total-count">
-    <h2>Total numbers</h2>
 
-    <div id="wrapper-total">
-      <canvas id="totalChart"></canvas>
+  <div id="main">
+
+    <h1>COVID-19 in India</h1>
+    <div id="total-count">
+
+      <div id="total-numbers">
+        <div class="total-item">
+          <div class="total-number" id="total-confirmed" style="background-color: hsl(30, 90%, 60%);">0</div>
+          <div>Confirmed cases</div>
+        </div>
+        <div class="total-item">
+          <div class="total-number" id="total-cured" style="background-color: hsl(120, 60%, 60%);">0</div>
+          <div>Cured</div>
+        </div>
+        <div class="total-item">
+          <div class="total-number" id="total-deaths" style="background-color: hsla(0, 90%, 60%);">0</div>
+          <div>Deaths</div>
+        </div>
+      </div>
+
+      <h2>Confirmed cases</h2>
+      <div id="wrapper-total">
+        <canvas id="totalChart"></canvas>
+      </div>
+      <h2>Cured vs. Deaths</h2>
+      <div id="wrapper-total-cd">
+        <canvas id="totalChart-cd"></canvas>
+      </div>
     </div>
 
-    <div class="total-item">
-      <div class="total-number" id="total-confirmed-indian" style="background-color: hsl(30, 90%, 60%);">0</div>
-      <div>Total Confirmed cases (Indian National)</div>
+    <h2 style="padding: 32px 32px 16px; border-top: 1px solid lightgray;">Latest statewise numbers</h2>
+    <div style="position: reltive;">
+      <div id="wrapper">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div id="filter">
+        <img alt="filters" src="filter.png" id="filter-img" />
+        <div class="legend" id="confirmed-indian">
+          <div style="background-color: hsl(30, 90%, 60%);" class="legend-color"></div>
+          <div>Confirmed cases</div>
+        </div>
+        <div class="legend" id="cured">
+          <div style="background-color: hsl(120, 60%, 60%);" class="legend-color"></div>
+          <div>Cured</div>
+        </div>
+        <div class="legend" id="deaths">
+          <div style="background-color: hsla(0, 90%, 60%);" class="legend-color"></div>
+          <div>Deaths</div>
+        </div>
+      </div>
     </div>
-    <div class="total-item">
-      <div class="total-number" id="total-confirmed-foreign" style="background-color: hsl(200, 70%, 40%);">0</div>
-      <div>Total Confirmed cases (Foreign National)</div>
-    </div>
-    <div class="total-item">
-      <div class="total-number" id="total-cured" style="background-color: hsl(120, 60%, 60%);">0</div>
-      <div>Cured/Discharged/Migrated</div>
-    </div>
-    <div class="total-item">
-      <div class="total-number" id="total-deaths" style="background-color: hsla(0, 90%, 60%);">0</div>
-      <div>Deaths</div>
-    </div>
-  </div>
+    <p id="footnote">*All data is updated from the official <a id="mohfw-link" href="https://www.mohfw.gov.in/"
+        target="_blank" rel="noreferrer">Ministry of Health and Family Welfare</a> site every hour.</p>
 
-  <h2 style="padding: 0 32px;">Latest statewise numbers</h2>
-  <div id="wrapper">
-    <canvas id="myChart"></canvas>
   </div>
-  <div id="filter">
-    <img alt="filters" src="filter.png" id="filter-img" />
-    <div class="legend" id="confirmed-indian">
-      <div style="background-color: hsl(30, 90%, 60%);" class="legend-color"></div>
-      <div>Total Confirmed cases (Indian National)</div>
-    </div>
-    <div class="legend" id="confirmed-Foreign">
-      <div style="background-color: hsl(200, 70%, 40%);" class="legend-color"></div>
-      <div>Total Confirmed cases (Foreign National)</div>
-    </div>
-    <div class="legend" id="cured">
-      <div style="background-color: hsl(120, 60%, 60%);" class="legend-color"></div>
-      <div>Cured/Discharged/Migrated</div>
-    </div>
-    <div class="legend" id="deaths">
-      <div style="background-color: hsla(0, 90%, 60%);" class="legend-color"></div>
-      <div>Deaths</div>
-    </div>
-  </div>
-  <p id="footnote">*All data is updated from the official <a id="mohfw-link" href="https://www.mohfw.gov.in/"
-      target="_blank" rel="noreferrer">Ministry of Health and Family Welfare</a> site every hour.</p>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
   <script src="scripts.js"></script>
