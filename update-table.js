@@ -48,7 +48,7 @@ function cleanupTable(rawData) {
     if (parseInt(rawData[tableIndex][i]['S. No.'])) {
       cleanObj[rawData[tableIndex][i]['Name of State / UT']] = {
         "S. No.": rawData[tableIndex][i]['S. No.'],
-        "Total Confirmed cases (Indian National)": parseInt(rawData[tableIndex][i]['Total Confirmed cases *']),
+        "Total Confirmed cases (Indian National)": parseInt(rawData[tableIndex][i]['Total Confirmed cases (Including 49 foreign Nationals)']),
         "Total Confirmed cases ( Foreign National )": 0,
         "Cured/Discharged/Migrated": parseInt(rawData[tableIndex][i]['Cured/Discharged/Migrated']),
         "Death": parseInt(rawData[tableIndex][i]['Death'])
