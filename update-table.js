@@ -45,9 +45,10 @@ function cleanupTable(rawData) {
   const cleanObj = {};
   for (let i = 0; i < rawData[tableIndex].length; i++) {
     if (parseInt(rawData[tableIndex][i]['S. No.'])) {
+
       cleanObj[rawData[tableIndex][i]['Name of State / UT']] = {
         "S. No.": rawData[tableIndex][i]['S. No.'],
-        "Total Confirmed cases (Indian National)": parseInt(rawData[tableIndex][i]['Total Confirmed cases (Including 55 foreign Nationals)']),
+        "Total Confirmed cases (Indian National)": parseInt(findRightKeyValue(rawData[tableIndex][i], 'Total Confirmed')),
         "Total Confirmed cases ( Foreign National )": 0,
         "Cured/Discharged/Migrated": parseInt(rawData[tableIndex][i]['Cured/Discharged/Migrated']),
         "Death": parseInt(rawData[tableIndex][i]['Death'])
@@ -55,6 +56,16 @@ function cleanupTable(rawData) {
     }
   }
   return cleanObj;
+}
+
+function findRightKeyValue(obj, keyPart) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (key.indexOf(keyPart) !== -1) {
+        return obj[key];
+      }
+    }
+  }
 }
 
 function getTableData() {
