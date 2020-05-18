@@ -50,8 +50,8 @@ function cleanupTable(rawData) {
         "S. No.": rawData[tableIndex][i]['S. No.'],
         "Total Confirmed cases (Indian National)": parseInt(findRightKeyValue(rawData[tableIndex][i], 'Total Confirmed')),
         "Total Confirmed cases ( Foreign National )": 0,
-        "Cured/Discharged/Migrated": parseInt(rawData[tableIndex][i]['Cured/Discharged/Migrated']),
-        "Death": parseInt(rawData[tableIndex][i]['Death'])
+        "Cured/Discharged/Migrated": parseInt(findRightKeyValue(rawData[tableIndex][i], 'Cured')),
+        "Death": parseInt(findRightKeyValue(rawData[tableIndex][i], 'Death'))
       }
     }
   }
